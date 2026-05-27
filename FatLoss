@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Fat Loss Playbook</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;600;700;900&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #faf8f5;
+    --white: #ffffff;
+    --ink: #1c1c1c;
+    --mid: #555;
+    --dim: #999;
+    --rule: #e8e4de;
+    --orange: #c0440a;
+    --orange-light: #fff4ee;
+    --orange-mid: rgba(192,68,10,0.1);
+    --slate: #2a3f5f;
+    --slate-light: #eef2f8;
+    --teal: #0f6b5e;
+    --teal-light: #edf7f5;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.75;
+  }
+
+  .cover {
+    background: #1c1c1c;
+    color: #fff;
+    padding: 80px 40px 64px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cover::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: repeating-linear-gradient(
+      90deg,
+      rgba(255,255,255,0.015) 0px,
+      rgba(255,255,255,0.015) 1px,
+      transparent 1px,
+      transparent 60px
+    );
+    pointer-events: none;
+  }
+
+  .cover-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 20px;
+  }
+
+  .cover h1 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(40px, 7vw, 80px);
+    font-weight: 900;
+    line-height: 1.0;
+    margin-bottom: 24px;
+    max-width: 600px;
+  }
+
+  .cover h1 em {
+    font-style: normal;
+    color: var(--orange);
+  }
+
+  .cover-sub {
+    font-size: 15px;
+    color: rgba(255,255,255,0.6);
+    max-width: 480px;
+    line-height: 1.8;
+    margin-bottom: 32px;
+  }
+
+  .cover-pills { display: flex; gap: 10px; flex-wrap: wrap; }
+
+  .cpill {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    color: rgba(255,255,255,0.75);
+  }
+
+  nav {
+    background: var(--white);
+    border-bottom: 1px solid var(--rule);
+    padding: 0 40px;
+    display: flex;
+    overflow-x: auto;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .ntab {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--dim);
+    padding: 16px 20px;
+    cursor: pointer;
+    border: none;
+    background: none;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+    transition: all 0.15s;
+  }
+  .ntab:hover { color: var(--ink); }
+  .ntab.active { color: var(--orange); border-bottom-color: var(--orange); }
+
+  .panel { display: none; padding: 48px 40px; max-width: 860px; }
+  .panel.active { display: block; }
+
+  .ph {
+    font-family: 'Fraunces', serif;
+    font-size: 34px;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+
+  .ps {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--dim);
+    margin-bottom: 32px;
+  }
+
+  .sh2 {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 4px;
+    margin-top: 36px;
+  }
+
+  .box {
+    padding: 22px 26px;
+    margin-bottom: 24px;
+    border-left: 3px solid var(--orange);
+    background: var(--orange-light);
+  }
+  .box.slate { border-left-color: var(--slate); background: var(--slate-light); }
+  .box.teal { border-left-color: var(--teal); background: var(--teal-light); }
+
+  .box-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 8px;
+  }
+  .box.slate .box-label { color: var(--slate); }
+  .box.teal .box-label { color: var(--teal); }
+
+  .box-text { font-size: 14px; color: var(--ink); line-height: 1.75; }
+
+  .week-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+    margin-bottom: 32px;
+  }
+
+  .wcard { background: var(--white); padding: 22px 20px; }
+  .wnum { font-family: 'Fraunces', serif; font-size: 40px; font-weight: 900; color: var(--rule); line-height: 1; margin-bottom: 8px; }
+  .wfocus { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--orange); margin-bottom: 8px; }
+  .wtext { font-size: 12.5px; color: var(--mid); line-height: 1.65; }
+
+  .ex-wrap { background: var(--white); border: 1px solid var(--rule); margin-bottom: 28px; }
+
+  .ex-header {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--rule);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .ex-day { font-family: 'Fraunces', serif; font-size: 18px; font-weight: 700; }
+  .ex-focus { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--orange); margin-top: 3px; }
+  .ex-time { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--dim); }
+
+  .block-row {
+    padding: 10px 20px;
+    background: var(--bg);
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--slate);
+  }
+
+  table.et { width: 100%; border-collapse: collapse; font-size: 13px; }
+  table.et th { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--dim); padding: 12px 20px; text-align: left; background: var(--bg); border-bottom: 1px solid var(--rule); font-weight: 400; }
+  table.et td { padding: 13px 20px; border-bottom: 1px solid #f0ece5; color: var(--mid); vertical-align: top; }
+  table.et tr:last-child td { border-bottom: none; }
+  table.et tr:hover td { background: var(--bg); }
+  .ename { color: var(--ink); font-weight: 500; margin-bottom: 3px; }
+  .enote { font-size: 11.5px; color: var(--dim); font-family: 'DM Mono', monospace; line-height: 1.5; }
+  .sets { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--orange); white-space: nowrap; }
+
+  .clist { background: var(--white); border: 1px solid var(--rule); margin-bottom: 28px; }
+  .clist-h { padding: 14px 20px; border-bottom: 1px solid var(--rule); font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--dim); }
+
+  .ci { display: flex; align-items: flex-start; gap: 14px; padding: 13px 20px; border-bottom: 1px solid #f5f2ed; cursor: pointer; transition: background 0.12s; }
+  .ci:last-child { border-bottom: none; }
+  .ci:hover { background: var(--bg); }
+  .cb { width: 17px; height: 17px; border: 1.5px solid #ccc; flex-shrink: 0; margin-top: 2px; display: flex; align-items: center; justify-content: center; transition: all 0.15s; }
+  .ci.done .cb { background: var(--teal); border-color: var(--teal); }
+  .ci.done .cb::after { content: '✓'; font-size: 10px; color: #fff; font-weight: 700; }
+  .ct { font-size: 13.5px; color: var(--ink); }
+  .ci.done .ct { color: var(--dim); text-decoration: line-through; }
+  .cn { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--dim); margin-top: 3px; }
+
+  .macro-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--rule); border: 1px solid var(--rule); margin-bottom: 28px; }
+  .mc { background: var(--white); padding: 24px 16px; text-align: center; }
+  .mn { font-family: 'Fraunces', serif; font-size: 30px; font-weight: 900; color: var(--orange); line-height: 1; margin-bottom: 6px; }
+  .mu { font-family: 'DM Mono', monospace; font-size: 9px; color: var(--dim); letter-spacing: 1px; margin-bottom: 4px; }
+  .ml { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--mid); }
+
+  .phase-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--rule); border: 1px solid var(--rule); margin-bottom: 28px; }
+  .phase-card { background: var(--white); padding: 24px 20px; }
+  .phase-num { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--orange); margin-bottom: 8px; }
+  .phase-title { font-family: 'Fraunces', serif; font-size: 17px; font-weight: 700; margin-bottom: 10px; }
+  .phase-text { font-size: 12.5px; color: var(--mid); line-height: 1.65; }
+
+  @media (max-width: 640px) {
+    .cover, .panel { padding: 40px 20px; }
+    nav { padding: 0 8px; }
+    .ntab { padding: 14px 12px; }
+    .macro-row, .phase-row { grid-template-columns: repeat(2,1fr); }
+    .ex-header { flex-direction: column; gap: 6px; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="cover-tag">Your Personal Playbook</div>
+  <h1>Lose the Fat.<br>Keep the <em>Muscle.</em></h1>
+  <p class="cover-sub">A no-nonsense 12-week guide to dropping body fat and building a leaner, stronger body — without living in the gym or eating like a rabbit.</p>
+  <div class="cover-pills">
+    <span class="cpill">4 Days / Week</span>
+    <span class="cpill">Full Gym</span>
+    <span class="cpill">12-Week Program</span>
+    <span class="cpill">Fat Loss & Recomp</span>
+  </div>
+</div>
+
+<nav>
+  <button class="ntab active" onclick="show('start')">Getting Started</button>
+  <button class="ntab" onclick="show('workouts')">Your Workouts</button>
+  <button class="ntab" onclick="show('nutrition')">Nutrition</button>
+  <button class="ntab" onclick="show('tracking')">Tracking Progress</button>
+  <button class="ntab" onclick="show('faqs')">FAQs</button>
+</nav>
+
+<!-- GETTING STARTED -->
+<div class="panel active" id="panel-start">
+  <div class="ph">Let's get to work.</div>
+  <div class="ps">Read this before your first session</div>
+
+  <div class="box">
+    <div class="box-label">How This Works</div>
+    <div class="box-text">Fat loss comes from your nutrition. Training's job is to preserve and build muscle while you lose fat — so that what's left when the fat comes off looks the way you want it to. You'll train 4 days a week, eat in a moderate calorie deficit with high protein, and check in with your coach weekly. That's the whole system.</div>
+  </div>
+
+  <div class="sh2">The three rules.</div>
+  <div class="ps" style="margin-top:4px;">Everything else is secondary</div>
+
+  <div class="box teal">
+    <div class="box-label">Rule 1</div>
+    <div class="box-text"><strong>Hit your protein target every day.</strong> This is the single most important thing you can do. High protein keeps you full, preserves muscle while you're in a calorie deficit, and speeds up your metabolism. Without it, you'll lose muscle alongside fat and end up smaller but not better.</div>
+  </div>
+
+  <div class="box slate">
+    <div class="box-label">Rule 2</div>
+    <div class="box-text"><strong>Show up for your 4 sessions every week.</strong> Missing one session occasionally is fine. Missing them consistently kills results. Block your training days in your calendar like they're appointments you can't cancel. Consistency over 12 weeks beats intensity in any single session.</div>
+  </div>
+
+  <div class="box">
+    <div class="box-label">Rule 3</div>
+    <div class="box-text"><strong>Fill in your weekly check-in every Sunday.</strong> This is how your coach adjusts the plan as you progress. A check-in takes 5 minutes and ensures your program stays calibrated to your actual results — not a generic template.</div>
+  </div>
+
+  <div class="sh2">Your 4-day schedule.</div>
+  <div class="week-grid">
+    <div class="wcard"><div class="wnum">MON</div><div class="wfocus">Day A · Lower Body</div><div class="wtext">Squat-focused. Legs and glutes.</div></div>
+    <div class="wcard"><div class="wnum">TUE</div><div class="wfocus">Day B · Upper Body</div><div class="wtext">Chest, back, shoulders, arms.</div></div>
+    <div class="wcard"><div class="wnum">WED</div><div class="wfocus">Rest Day</div><div class="wtext">Walk 20–30 min. Light activity only.</div></div>
+    <div class="wcard"><div class="wnum">THU</div><div class="wfocus">Day C · Lower Body</div><div class="wtext">Deadlift-focused. Hamstrings and glutes.</div></div>
+    <div class="wcard"><div class="wnum">FRI</div><div class="wfocus">Day D · Upper Body</div><div class="wtext">Push and pull with a finisher.</div></div>
+    <div class="wcard"><div class="wnum">SAT/SUN</div><div class="wfocus">Rest</div><div class="wtext">Walking is great. Nothing intense.</div></div>
+  </div>
+
+  <div class="sh2">Before your first session.</div>
+  <div class="clist">
+    <div class="clist-h">Checklist — Complete Before Day 1</div>
+    <div class="ci" onclick="tog(this)"><div class="cb"></div><div><div class="ct">Take baseline photos — front and side in fitted clothing</div><div class="cn">The most important thing you'll do today</div></div></div>
+    <div class="ci" onclick="tog(this)"><div class="cb"></div><div><div class="ct">Weigh yourself first thing in the morning (before eating or drinking)</div></div></div>
+    <div class="ci" onclick="tog(this)"><div class="cb"></div><div><div class="ct">Measure your waist at your belly button and hips at the widest point</div></div></div>
+    <div class="ci" onclick="tog(this)"><div class="cb"></div><div><div class="ct">Download MyFitnessPal and log what you eat for 3 days before changing anything</div><div class="cn">Awareness before action</div></div></div>
+    <div class="ci" onclick="tog(this)"><div class="cb"></div><div><div class="ct">Block all 4 training days in your calendar this week</div></div></div>
+    <div class="ci" onclick="tog(this)"><div class="cb"></div><div><div class="ct">Read through your first workout so there are no surprises in the gym</div></div></div>
+  </div>
+</div>
+
+<!-- WORKOUTS -->
+<div class="panel" id="panel-workouts">
+  <div class="ph">Your Workouts.</div>
+  <div class="ps">4 sessions per week — upper/lower split</div>
+
+  <div class="box">
+    <div class="box-label">How to Use These Workouts</div>
+    <div class="box-text">Pick a weight that feels challenging by the last 2–3 reps of each set — hard but not impossible. Write down what you lifted. Every session, try to do one more rep or add a small amount of weight. That's called progressive overload, and it's the reason your body will change.</div>
+  </div>
+
+  <!-- DAY A -->
+  <div class="ex-wrap">
+    <div class="ex-header">
+      <div><div class="ex-day">Day A — Monday</div><div class="ex-focus">Lower Body · Squat Focus</div></div>
+      <div class="ex-time">~55 minutes</div>
+    </div>
+    <div class="block-row">Warm-Up · 8 Minutes</div>
+    <table class="et">
+      <thead><tr><th>Exercise</th><th>Sets × Reps</th></tr></thead>
+      <tbody>
+        <tr><td><div class="ename">Treadmill Walk or Bike</div><div class="enote">Easy pace to raise heart rate</div></td><td class="sets">5 min</td></tr>
+        <tr><td><div class="ename">Bodyweight Squat</div><div class="enote">Slow and deliberate. Find your depth.</div></td><td class="sets">2 × 10</td></tr>
+      </tbody>
+    </table>
+    <div class="block-row">Working Sets</div>
+    <table class="et">
+      <thead><tr><th>Exercise</th><th>Sets × Reps</th></tr></thead>
+      <tbody>
+        <tr><td><div class="ename">Barbell Back Squat</div><div class="enote">Main lift. Feet shoulder-width, chest tall, squat to depth. Rest 2 min between sets.</div></td><td class="sets">4 × 8–10</td></tr>
+        <tr><td><div class="ename">Leg Press</div><div class="enote">Feet shoulder-width. Full range. Slow on the way down. Rest 90 sec.</div></td><td class="sets">3 × 12–15</td></tr>
+        <tr><td><div class="ename">Dumbbell Walking Lunge</div><div class="enote">Front knee over ankle. Step with control. Rest 60 sec.</div></td><td class="sets">3 × 10 each leg</td></tr>
+        <tr><td><div class="ename">Leg Curl Machine</div><div class="enote">3-second lowering phase. Rest 60 sec.</div></td><td class="sets">3 × 12–15</td></tr>
+        <tr><td><div class="ename">Metabolic Finisher: Sled Push or Rowing Machine</div><div class="enote">8 minutes. 40 seconds on, 20 seconds off. Burns extra calories without hurting recovery.</div></td><td class="sets">8 min</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- DAY B -->
+  <div class="ex-wrap">
+    <div class="ex-header">
+      <div><div class="ex-day">Day B — Tuesday</div><div class="ex-focus">Upper Body · Push + Pull</div></div>
+      <div class="ex-time">~55 minutes</div>
+    </div>
+    <div class="block-row">Warm-Up · 8 Minutes</div>
+    <table class="et">
+      <thead><tr><th>Exercise</th><th>Sets × Reps</th></tr></thead>
+      <tbody>
+        <tr><td><div class="ename">Band Pull-Apart</div><div class="enote">Light band. Activates your rear shoulders before pressing.</div></td><td class="sets">2 × 15</td></tr>
+        <tr><td><div class="ename">Arm Circles + Shoulder Rolls</div></td><td class="sets">60 seconds</td></tr>
+      </tbody>
+    </table>
+    <div class="block-row">Working Sets</div>
+    <table class="et">
+      <thead><tr><th>Exercise</th><th>Sets × Reps</th></tr></thead>
+      <tbody>
+        <tr><td><div class="ename">Barbell Bench Press</div><div class="enote">Bar to lower chest. Controlled back up. Rest 2 min.</div></td><td class="sets">4 × 8–10</td></tr>
+        <tr><td><div class="ename">Barbell Row</div><div class="enote">Brace your core. Pull elbow straight back. Rest 90 sec.</div></td><td class="sets">4 × 10–12</td></tr>
+        <tr><td><div class="ename">Dumbbell Shoulder Press</div><div class="enote">Seated or standing. Full extension overhead. Rest 90 sec.</div></td><td class="sets">3 × 10–12</td></tr>
+        <tr><td><div class="ename">Lat Pulldown</div><div class="enote">Pull to upper chest. Squeeze your lats at the bottom. Rest 90 sec.</div></td><td class="sets">3 × 10–12</td></tr>
+        <tr><td><div class="ename">Dumbbell Curl + Tricep Pushdown Superset</div><div class="enote">Do both back to back, then rest 60 sec. Efficient arm work.</div></td><td class="sets">3 × 12–15 each</td></tr>
+        <tr><td><div class="ename">Metabolic Finisher: Battle Ropes or Jump Rope</div><div class="enote">8 minutes. 30 sec on, 30 sec off.</div></td><td class="sets">8 min</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- DAY C -->
+  <div class="ex-wrap">
+    <div class="ex-header">
+      <div><div class="ex-day">Day C — Thursday</div><div class="ex-focus">Lower Body · Hinge Focus</div></div>
+      <div class="ex-time">~55 minutes</div>
+    </div>
+    <div class="block-row">Warm-Up · 8 Minutes</div>
+    <table class="et">
+      <thead><tr><th>Exercise</th><th>Sets × Reps</th></tr></thead>
+      <tbody>
+        <tr><td><div class="ename">Hip Hinge Pattern with Broomstick</div><div class="enote">Practice before loading. Flat back, hinge at hips.</div></td><td class="sets">2 × 10</td></tr>
+        <tr><td><div class="ename">Glute Bridge</div><div class="enote">Squeeze hard at the top. 2-second hold.</div></td><td class="sets">2 × 12</td></tr>
+      </tbody>
+    </table>
+    <div class="block-row">Working Sets</div>
+    <table class="et">
+      <thead><tr><th>Exercise</th><th>Sets × Reps</th></tr></thead>
+      <tbody>
+        <tr><td><div class="ename">Romanian Deadlift</div><div class="enote">Main lift today. Hinge at hips, feel the stretch. Rest 2 min.</div></td><td class="sets">4 × 10–12</td></tr>
+        <tr><td><div class="ename">Bulgarian Split Squat</div><div class="enote">Back foot on bench. Front leg does the work. Go slow. Rest 90 sec each leg.</div></td><td class="sets">3 × 10 each leg</td></tr>
+        <tr><td><div class="ename">Leg Curl Machine</div><div class="enote">Slow and controlled. Rest 60 sec.</div></td><td class="sets">3 × 12–15</td></tr>
+        <tr><td><div class="ename">Hip Thrust (Barbell or Dumbbell)</div><div class="enote">Upper back on bench. Drive hips up. Glute squeeze at top. Rest 90 sec.</div></td><td class="sets">3 × 12–15</td></tr>
+        <tr><td><div class="ename">Metabolic Finisher: Stairmaster or Incline Treadmill Walk</div><div class="enote">12 minutes at a challenging pace. Burns calories, doesn't hurt legs for Friday.</div></td><td class="sets">12 min</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- DAY D -->
+  <div class="ex-wrap">
+    <div class="ex-header">
+      <div><div class="ex-day">Day D — Friday</div><div class="ex-focus">Upper Body + Full Body Finisher</div></div>
+      <div class="ex-time">~60 minutes</div>
+    </div>
+    <div class="block-row">Warm-Up · 8 Minutes</div>
+    <table class="et">
+      <thead><tr><th>Exercise</th><th>Sets × Reps</th></tr></thead>
+      <tbody>
+        <tr><td><div class="ename">Band Pull-Apart + Face Pull</div><div class="enote">Shoulder health before a pressing session</div></td><td class="sets">2 × 15 each</td></tr>
+      </tbody>
+    </table>
+    <div class="block-row">Working Sets</div>
+    <table class="et">
+      <thead><tr><th>Exercise</th><th>Sets × Reps</th></tr></thead>
+      <tbody>
+        <tr><td><div class="ename">Incline Dumbbell Press</div><div class="enote">Upper chest focus. Controlled descent. Rest 90 sec.</div></td><td class="sets">4 × 10–12</td></tr>
+        <tr><td><div class="ename">Chest-Supported Dumbbell Row</div><div class="enote">Chest on the bench. Full range. Pause at top. Rest 90 sec.</div></td><td class="sets">4 × 10–12</td></tr>
+        <tr><td><div class="ename">Cable Lateral Raise</div><div class="enote">Light weight. Lead with elbow. Rest 45 sec.</div></td><td class="sets">3 × 15</td></tr>
+        <tr><td><div class="ename">Face Pull</div><div class="enote">Rope to eye level, pull to ears, elbows high. Rest 45 sec.</div></td><td class="sets">3 × 15</td></tr>
+        <tr><td><div class="ename">Ab Circuit: Dead Bug + Side Plank + Cable Crunch</div><div class="enote">All three back to back = 1 round. Rest 60 sec between rounds.</div></td><td class="sets">3 rounds</td></tr>
+        <tr><td><div class="ename">Metabolic Finisher: Any Cardio Machine</div><div class="enote">10 minutes. Push the pace — this is the end of your training week.</div></td><td class="sets">10 min</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- NUTRITION -->
+<div class="panel" id="panel-nutrition">
+  <div class="ph">Nutrition.</div>
+  <div class="ps">2,200 calories · protein first · every day</div>
+
+  <div class="box">
+    <div class="box-label">The Truth About Fat Loss</div>
+    <div class="box-text">Fat loss is 80% what you eat. Training builds the muscle and raises your metabolism — but you cannot out-train a poor diet. 2,200 calories puts you in a real but sustainable deficit. High protein keeps you full, preserves your muscle, and speeds up your metabolism. No banned foods, no crash dieting. Just consistent eating within your targets.</div>
+  </div>
+
+  <div class="sh2">Your daily targets.</div>
+  <div class="macro-row">
+    <div class="mc"><div class="mn">2,200</div><div class="mu">calories per day</div><div class="ml">Daily Calories</div></div>
+    <div class="mc"><div class="mn">180g</div><div class="mu">minimum, every single day</div><div class="ml">Protein — Non-Negotiable</div></div>
+    <div class="mc"><div class="mn">55g</div><div class="mu">supports hormones + fullness</div><div class="ml">Fat Minimum</div></div>
+    <div class="mc"><div class="mn">~165g</div><div class="mu">fuels training + energy</div><div class="ml">Carbohydrates</div></div>
+  </div>
+
+  <div class="box teal">
+    <div class="box-label">Why Protein Is the Priority</div>
+    <div class="box-text">When you're in a calorie deficit, your body wants to burn muscle for energy alongside fat. High protein intake prevents that. It also keeps you fuller longer — gram for gram, protein is the most satiating macronutrient. Hit 180g protein first every day. The calories and other macros will fall into place around it.</div>
+  </div>
+
+  <div class="sh2">How the 2,200 calories break down across 4 meals.</div>
+  <div class="ps" style="margin-top:4px;">4 meals per day — timed around your training</div>
+
+  <!-- MEAL 1 -->
+  <div class="ex-wrap" style="margin-bottom:16px;">
+    <div class="ex-header" style="background:#f9f7f4;">
+      <div><div class="ex-day" style="font-size:16px;">Meal 1 · Morning</div><div class="ex-focus">Within 1 hour of waking — sets protein intake on track for the day</div></div>
+      <div style="text-align:right; font-family:'DM Mono',monospace; font-size:11px; color:var(--dim); line-height:1.8;">~500 kcal &nbsp;|&nbsp; 48g protein<br>38g carbs &nbsp;|&nbsp; 14g fat</div>
+    </div>
+    <table class="et">
+      <thead><tr><th>Food</th><th>Amount</th><th>Protein</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td><div class="ename">Whole eggs</div></td><td style="font-family:'DM Mono',monospace;font-size:12px;color:var(--mid);">2 large</td><td class="sets">12g</td><td style="font-size:12px;color:var(--dim);">Scrambled or poached</td></tr>
+        <tr><td><div class="ename">Egg whites</div></td><td style="font-family:'DM Mono',monospace;font-size:12px;color:var(--mid);">4 whites</td><td class="sets">14g</td><td style="font-size:12px;color:var(--dim);">Boosts protein without much fat or calories</td></tr>
+        <tr><td><div class="ename">Greek yogurt (0% fat)</div></td><td style="font-family:'DM Mono',monospace;font-size:12px;color:var(--mid);">¾ cup</td><td class="sets">13g</td><td style="font-size:12px;color:var(--dim);">Top with berries, no sugar added</td></tr>
+        <tr><td><div class="ename">Oats (dry)</div></td><td style="font-family:'DM Mono',monospace;font-size:12px;color:var(--mid);">⅓ cup</td><td class="sets">4g</td><td style="font-size:12px;color:var(--dim);">Slow carbs = sustained energy, not a spike</td></tr>
+        <tr><td><div class="ename">Mixed berries</div></td><td style="font-family:'DM Mono',monospace;font-size:12px;color:var(--mid);">½ cup</td><td class="sets">1g</td><td style="font-size:12px;color:var(--dim);">Fiber + antioxidants, low sugar</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- MEAL 2 -->
+  <div class="ex-wrap" style="margin-bottom:16px;">
+    <div class="ex-header" style="background:#f9f7f4;">
+      <div><div class="ex-day" style="font-size:16px;">Meal 2 · Post-Workout</div><div class="ex-focus">Within 60 minutes of finishing training — don't skip this</div></div>
+      <div style="text-align:right; font-family:'DM Mono',monospace; font-size:11px; color:var(--dim); line-height:1.8;">~420 kcal &nbsp;|&nbsp; 42g protein<br>48g carbs &nbsp;|&nbsp; 5g fat</div>
+    </div>
+    <table class="et">
+      <thead><tr><th>Food</th><th>Amount</th><th>Protein</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td><div class="ename">Whey protein powder</div></td><td style="font-family:'DM Mono',monospace;font-size:12px;color:var(--mid);">1.5 scoops</td><td class="sets">37g</td><td style="font-size:12px;color:var(--dim);">Fast-absorbing — ideal immediately post-workout</td></tr>
+        <tr><td><div class="ename">Banana</div></td><td style="font-family:'DM Mono',monospace;font-size:12px;color:var(--mid);">1 large</td><td class="sets">1g</td><td style="font-size:12px;color:var(--dim);">Replenishes muscle glycogen depleted during training</td></tr>
+        <tr><td><div class="ename">Water or low-fat milk</div></td><td style="font-family:'DM Mono',monospace;font-size:12px;color:var(--mid);">10 oz</td><td class="sets">4g</td><td style="font-size:12px;color:var(--dim);">Milk adds extra protein and carbs. Water keeps it lower calorie.</td></tr>
+        <tr><td><div class="ename">Rice cakes</div></td><td style="font-family:'DM Mono',monospace;font-size:12px;color:var(--mid);">2 cakes</td><td class="sets">2g</td><td style="font-size:12px;color:var(--dim);">Quick carbs, very low fat — good post-workout option</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- MEAL 3 -->
+  <div class="ex-wrap" style="margin-bottom:16px;">
+    <div class="ex-header" style="background:#f9f7f4;">
+      <div><div class="ex-day" style="font-size:16px;">Meal 3 · Lunch</div><div class="ex-focus">Your biggest meal — built around a lean protein source</div></div>
+      <div style="text-align:right; font-family:'DM Mono',monospace; font-size:11px; color:var(--dim); line-height:1.8;">~600 kcal &nbsp;|&nbsp; 52g protein<br>55g carbs &nbsp;|&nbsp; 16g fat</div>
+    </div>
+    <table class="et">
+      <thead><tr><th>Food</th><th>Amount</th><th>Protein</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td><div class="ename">Chicken breast</div></td><td style="font-family:'DM Mono',monospace;font-size:12px;color:var(--mid);">7 oz cooked</td><td class="sets">49g</td><td style="font-size:12px;color:var(--dim);">Season well — you're eating this regularly, it needs to taste good</td></tr>
+        <tr><td><div class="ename">Brown rice or white rice (cooked)</div></td><td style="font-family:'DM Mono',monospace;font-size:12px;color:var(--mid);">¾ cup</td><td class="sets">3g</td><td style="font-size:12px;color:var(--dim);">Or swap for half a sweet potato</td></tr>
+        <tr><td><div class="ename">Roasted or steamed vegetables</div></td><td style="font-family:'DM Mono',monospace;font-size:12px;color:var(--mid);">1½ cups</td><td class="sets">4g</td><td style="font-size:12px;color:var(--dim);">Fill the plate — high volume, low calorie, keeps you full</td></tr>
+        <tr><td><div class="ename">Olive oil (for cooking or dressing)</div></td><td style="font-family:'DM Mono',monospace;font-size:12px;color:var(--mid);">1.5 tsp</td><td class="sets">0g</td><td style="font-size:12px;color:var(--dim);">Healthy fat — don't skip fat entirely or hunger gets unmanageable</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- MEAL 4 -->
+  <div class="ex-wrap" style="margin-bottom:28px;">
+    <div class="ex-header" style="background:#f9f7f4;">
+      <div><div class="ex-day" style="font-size:16px;">Meal 4 · Dinner</div><div class="ex-focus">End the day strong on protein — include a slow-digesting source</div></div>
+      <div style="text-align:right; font-family:'DM Mono',monospace; font-size:11px; color:var(--dim); line-height:1.8;">~580 kcal &nbsp;|&nbsp; 48g protein<br>42g carbs &nbsp;|&nbsp; 18g fat</div>
+    </div>
+    <table class="et">
+      <thead><tr><th>Food</th><th>Amount</th><th>Protein</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td><div class="ename">Ground beef (90/10) or salmon</div></td><td style="font-family:'DM Mono',monospace;font-size:12px;color:var(--mid);">5 oz cooked</td><td class="sets">35g</td><td style="font-size:12px;color:var(--dim);">Salmon adds omega-3s that reduce inflammation from training</td></tr>
+        <tr><td><div class="ename">Roasted potatoes or sweet potato</div></td><td style="font-family:'DM Mono',monospace;font-size:12px;color:var(--mid);">½ cup</td><td class="sets">2g</td><td style="font-size:12px;color:var(--dim);">Carbs at night are fine — they support overnight recovery</td></tr>
+        <tr><td><div class="ename">Large salad with greens</div></td><td style="font-family:'DM Mono',monospace;font-size:12px;color:var(--mid);">2 cups</td><td class="sets">2g</td><td style="font-size:12px;color:var(--dim);">Add cucumbers, tomatoes, peppers — high volume, close to zero calories</td></tr>
+        <tr><td><div class="ename">Cottage cheese (before bed)</div></td><td style="font-family:'DM Mono',monospace;font-size:12px;color:var(--mid);">½ cup</td><td class="sets">12g</td><td style="font-size:12px;color:var(--dim);">Slow-digesting casein protein. Feeds muscles overnight. Optional but effective.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- DAILY TOTALS -->
+  <div class="macro-row" style="margin-bottom:24px;">
+    <div class="mc"><div class="mn">2,100</div><div class="mu">approximate total</div><div class="ml">Daily Calories</div></div>
+    <div class="mc"><div class="mn">190g</div><div class="mu">across 4 meals</div><div class="ml">Total Protein</div></div>
+    <div class="mc"><div class="mn">~183g</div><div class="mu">fuels workouts</div><div class="ml">Total Carbs</div></div>
+    <div class="mc"><div class="mn">~53g</div><div class="mu">hormone support</div><div class="ml">Total Fat</div></div>
+  </div>
+
+  <div class="box">
+    <div class="box-label">On Training Days vs. Rest Days</div>
+    <div class="box-text">On training days, eat all 4 meals including the post-workout shake. On rest days, you can skip the post-workout meal and redistribute those calories across your other 3 meals — or just eat slightly less overall. A 150–200 kcal reduction on rest days is fine and creates a slightly deeper weekly deficit without feeling restrictive day to day.</div>
+  </div>
+
+  <div class="box slate">
+    <div class="box-label">The Three Things That Wreck This Plan</div>
+    <div class="box-text">
+      <strong>Liquid calories you're not tracking:</strong> One flavored coffee, two glasses of wine, or a sports drink can silently add 400–600 kcal to your day. Track everything that has calories — including drinks.<br><br>
+      <strong>Eating too little:</strong> Going below 1,600 kcal to lose faster kills training performance, tanks energy, and causes muscle loss. Slow is sustainable. Fast is temporary.<br><br>
+      <strong>Inconsistent weekends:</strong> Five days of discipline erased by two untracked days. You don't have to be perfect on weekends — but you need to stay aware. One off-plan meal is fine. An entire off-plan weekend is not.
+    </div>
+  </div>
+
+  <div class="box teal">
+    <div class="box-label">Easy Swaps That Keep the Macros Intact</div>
+    <div class="box-text">
+      <strong>Don't like chicken?</strong> Swap for ground turkey, canned tuna, or shrimp — same protein range.<br>
+      <strong>Hate eggs?</strong> Replace with a protein shake + a slice of whole wheat toast.<br>
+      <strong>Can't eat dairy?</strong> Use a plant-based protein powder and swap Greek yogurt for silken tofu blended with fruit.<br>
+      <strong>Need more volume?</strong> Add a second serving of vegetables to any meal — they're nearly free calories and keep you full.<br><br>
+      <em style="color:#999;">The foods are flexible. The targets — 2,200 kcal and 180g protein — are not.</em>
+    </div>
+  </div>
+</div>
+
+<!-- TRACKING -->
+<div class="panel" id="panel-tracking">
+  <div class="ph">Tracking Progress.</div>
+  <div class="ps">The scale is one tool — not the only one</div>
+
+  <div class="box">
+    <div class="box-label">Why the Scale Lies</div>
+    <div class="box-text">Your weight fluctuates by 2–4 lbs day to day based on water retention, sodium, carbs, and hormones. One number on one morning tells you nothing. What matters is the trend over 2–3 weeks. We track weight, measurements, and photos together — because together they tell the truth.</div>
+  </div>
+
+  <div class="sh2">Weekly check-in — every Sunday.</div>
+  <div class="clist">
+    <div class="clist-h">Submit to Your Coach by Sunday 8pm</div>
+    <div class="ci" onclick="tog(this)"><div class="cb"></div><div><div class="ct">Morning weight (fasted, same time every week)</div></div></div>
+    <div class="ci" onclick="tog(this)"><div class="cb"></div><div><div class="ct">Waist measurement at belly button</div></div></div>
+    <div class="ci" onclick="tog(this)"><div class="cb"></div><div><div class="ct">Progress photos — front and side (every 4 weeks minimum)</div></div></div>
+    <div class="ci" onclick="tog(this)"><div class="cb"></div><div><div class="ct">Workouts completed (out of 4)</div></div></div>
+    <div class="ci" onclick="tog(this)"><div class="cb"></div><div><div class="ct">Protein target hit (days out of 7)</div></div></div>
+    <div class="ci" onclick="tog(this)"><div class="cb"></div><div><div class="ct">Sleep average this week (hours per night)</div></div></div>
+    <div class="ci" onclick="tog(this)"><div class="cb"></div><div><div class="ct">Energy and hunger levels 1–10</div></div></div>
+    <div class="ci" onclick="tog(this)"><div class="cb"></div><div><div class="ct">One win this week</div></div></div>
+    <div class="ci" onclick="tog(this)"><div class="cb"></div><div><div class="ct">One thing that was hard</div></div></div>
+  </div>
+
+  <div class="sh2">What progress looks like over 12 weeks.</div>
+  <div class="phase-row">
+    <div class="phase-card">
+      <div class="phase-num">Weeks 1–4</div>
+      <div class="phase-title">Foundation</div>
+      <div class="phase-text">Building the habit. Scale may not move much. Energy improves. Workouts feel hard but you're showing up. This phase is about consistency, not results.</div>
+    </div>
+    <div class="phase-card">
+      <div class="phase-num">Weeks 5–8</div>
+      <div class="phase-title">Momentum</div>
+      <div class="phase-text">Visible changes start. Clothes fit differently. Strength going up. Scale trending down. This is when it becomes real.</div>
+    </div>
+    <div class="phase-card">
+      <div class="phase-num">Weeks 9–12</div>
+      <div class="phase-title">Results</div>
+      <div class="phase-text">Significant body composition change visible in photos. Strength numbers you didn't have in week 1. The hard part was weeks 1–4 — you earned this.</div>
+    </div>
+  </div>
+</div>
+
+<!-- FAQS -->
+<div class="panel" id="panel-faqs">
+  <div class="ph">Frequently Asked Questions.</div>
+  <div class="ps">Common concerns, honest answers</div>
+
+  <div class="sh2" style="margin-top:0;">"I'm not losing weight. What's wrong?"</div>
+  <div class="box" style="margin-top:12px;">
+    <div class="box-text">Two most common causes: eating more than you think (liquid calories, portion sizes), or not eating enough protein (which causes muscle loss that masks fat loss on the scale). Track everything honestly for one week and share it with your coach. The answer is almost always in the data.</div>
+  </div>
+
+  <div class="sh2">"I'm hungry all the time."</div>
+  <div class="box teal" style="margin-top:12px;">
+    <div class="box-text">Increase protein and vegetables first — both are very filling per calorie. Also check your sleep. Poor sleep spikes hunger hormones dramatically. If you're sleeping under 6 hours, hunger control becomes nearly impossible regardless of what you eat.</div>
+  </div>
+
+  <div class="sh2">"Can I do extra cardio to speed things up?"</div>
+  <div class="box slate" style="margin-top:12px;">
+    <div class="box-text">You can — but the finishers in your workouts already handle extra calorie burn. If you want to add walking on rest days (20–40 min), that's great and won't hurt recovery. Avoid adding intense cardio sessions on top of your 4 training days — it raises cortisol, hurts recovery, and often makes people hungrier without burning as many extra calories as they think.</div>
+  </div>
+
+  <div class="sh2">"I missed two sessions this week. Do I start over?"</div>
+  <div class="box" style="margin-top:12px;">
+    <div class="box-text">No. Pick up exactly where you left off. Don't try to cram 6 sessions into one week to "make up" for it — that's how people get injured and burnt out. One bad week doesn't erase four good ones. Consistency is measured in months, not days.</div>
+  </div>
+
+  <div class="sh2">"When will I see results?"</div>
+  <div class="box teal" style="margin-top:12px;">
+    <div class="box-text">Most people notice something in weeks 3–4 — clothes fitting differently, energy improving, strength going up. Visible fat loss that others notice usually happens in weeks 6–8. Dramatic before-and-after differences show up at week 12. The timeline is the same for nearly everyone who follows the program consistently. Trust it.</div>
+  </div>
+</div>
+
+<script>
+  function show(id) {
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.ntab').forEach(t => t.classList.remove('active'));
+    document.getElementById('panel-' + id).classList.add('active');
+    event.target.classList.add('active');
+  }
+  function tog(el) { el.classList.toggle('done'); }
+</script>
+</body>
+</html>
